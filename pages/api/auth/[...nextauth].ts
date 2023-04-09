@@ -23,8 +23,6 @@ export default NextAuth({
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error('Email and password required');
                 }
-                console.log(credentials.password)
-                console.log(credentials.email)
 
                 // Add logic here to look up the user from the credentials supplied
                 const user = await prismadb.user.findUnique({
@@ -33,7 +31,6 @@ export default NextAuth({
                     }
                 })
                 // check if user exist
-                console.log(user)
                 if (!user) {
                     throw new Error('Invalid email');
                 }
