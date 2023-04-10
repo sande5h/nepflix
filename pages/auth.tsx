@@ -2,8 +2,12 @@ import Input from "@/components/Input"; // This is the import statement and you 
 import { useState, useCallback } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+
+
 
 const auth = () => {
+    const router = useRouter();
     const [email, setemail] = useState("");
     const [name, setname] = useState("");
     const [password, setpassword] = useState("");
@@ -13,21 +17,7 @@ const auth = () => {
         setvariant((currentVariant) => currentVariant === "login" ? "register" : "login")
     }, []);
 
-    //logic for register
-    const register = useCallback(async () => {
-        try {
-            await axios.post("/api/register", {
-                name,
-                email,
-                password
-            });
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    }, [email, name, password]);
-
+    //logic for login
     const login = useCallback(async () => {
         try {
             await signIn('credentials', {
@@ -37,12 +27,33 @@ const auth = () => {
                 callbackUrl: '/'
             });
 
+            router.push('/')
+
 
         } catch (error) {
             console.log(error);
         }
 
-    }, [email, password]);
+    }, [email, password,router]);
+    
+    //logic for register
+    const register = useCallback(async () => {
+        try {
+            await axios.post("/api/register", {
+                name,
+                email,
+                password
+            });
+
+            login();
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, [email, name, password,login]);
+
+    
     return (
 
         <div className="h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center">
