@@ -31,7 +31,7 @@ model Account {
   provider           String
   providerAccountId  String //provider account id is only for google
   refresh_token      String?   @db.String //refresh token is only for google
-  accessToken        String?   @db.String
+  access_token        String?   @db.String
   expires_at         Int?
   token_type         String?
   scope              String?
