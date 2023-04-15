@@ -12,8 +12,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 export default NextAuth({
     providers: [
         GithubProvider({
-            clientId: process.env.GITHUB_CLIENT_ID || "",
-            clientSecret: process.env.GITHUB_CLIENT_SECRECT || "",
+            clientId: process.env.GITHUB_ID || "",
+            clientSecret: process.env.GITHUB_SECRECT || "",
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || '',
